@@ -1,0 +1,1 @@
+INSERT INTO bank_account VALUES (1, 'Quang Huy', 'TRAN');
