@@ -7,7 +7,7 @@ import com.sgcib.bank.account.service.TransactionService;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -34,7 +34,7 @@ public class TransactionController {
   @PostMapping(value = ACCOUNT_PATH + "/{accountId}", consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
   public Transaction addTransaction(@PathVariable("accountId") long accountId,
-      @RequestBody Transaction transaction) {
+      @Valid @RequestBody Transaction transaction) {
     return transactionService.addTransaction(accountId, transaction);
   }
 

@@ -1,7 +1,6 @@
 package com.sgcib.bank.account.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sgcib.bank.account.enumeration.ETransactionType;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +23,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Immutable;
 
 @Entity
@@ -54,12 +54,13 @@ public class Transaction {
   private LocalDate valueDate;
 
   @Column
+  @DecimalMin(value = "0", inclusive = false)
+  @Digits(integer = 11, fraction = 2)
   @NotNull
   private BigDecimal amount;
 
   @ManyToOne
   @JoinColumn(name = "account_id", nullable = false)
-  @NotNull
   private BankAccount bankAccount;
 
 }
